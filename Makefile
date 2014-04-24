@@ -2,6 +2,7 @@
 node:
 	./bootstrap.sh
 buildapp:
+	mkdir -p downloads/opendata
 	nodejs/bin/npm install
 	nodejs/bin/npm install bower
 	nodejs/bin/npm install gulp

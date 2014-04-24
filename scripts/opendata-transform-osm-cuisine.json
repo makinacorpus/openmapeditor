@@ -1,0 +1,30 @@
+{
+	"source": "../downloads/opendata/osm-cuisine.json",
+	"data": "features",
+	"geometry": {"lat" : "geometry.coordinates[0]", "lng": "geometry.coordinates[1]"},
+	"popupContent": {
+		"title": "properties.name",
+		"labels": {
+			"amenity": "Équipement",
+			"cuisine": "Type de cuisine",
+			"phone": "Téléphone",
+			"website": "Site Internet",
+			"addr:housenumber": "Numéro de rue",
+			"addr:street": "Nom de la rue",
+			"addr:postcode": "Code postal",
+			"addr:city": "Commune",
+			"wheelchair": "Accès aux PMR",
+			"source": "Source"
+		}
+	},
+	"icons": {
+		"switch": "properties.amenity",
+		"case" : {
+			"restaurant": "restaurant",
+			"fast_food": "fastfood",
+			"cafe":  "cafe"
+		},
+		"default": "default"
+	},
+	"output": "static/geojson/osm-cuisine.geo.json"
+}

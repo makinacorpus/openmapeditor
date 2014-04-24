@@ -1,0 +1,22 @@
+{
+	"source": "../downloads/opendata/osm-bakery.json",
+	"data": "features",
+	"geometry": {"lat" : "geometry.coordinates[0]", "lng": "geometry.coordinates[1]"},
+	"popupContent": {
+		"title": "properties.name",
+		"labels": {
+			"amenity": "Équipement",
+			"cuisine": "Type de cuisine",
+			"phone": "Téléphone",
+			"website": "Site Internet",
+			"addr:housenumber": "Numéro de rue",
+			"addr:street": "Nom de la rue",
+			"addr:postcode": "Code postal",
+			"addr:city": "Commune",
+			"wheelchair": "Accès aux PMR",
+			"source": "Source"
+		}
+	},
+	"icon": "bakery",
+	"output": "static/geojson/osm-bakery.geo.json"
+}

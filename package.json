@@ -1,0 +1,45 @@
+{
+  "name": "openmapeditor",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node app/api.js",
+    "debug": "DEBUG=express:* node --debug app/api.js",
+    "dev": "./node_modules/nodemon/bin/nodemon.js --debug app/api.js",
+    "test": "gulp test"
+  },
+  "dependencies": {
+    "express": "~3.4.8",
+    "sqlite3": "~2.2.0",
+    "formidable": "~1.0.14",
+    "q": "1.0.0",
+    "lodash": "~2.4.1",
+    "togeojson": "~0.7.0",
+    "xmldom": "0.1.19",
+    "adm-zip": "~0.4.4"
+  },
+  "devDependencies": {
+    "karma": "~0.10",
+    "karma-junit-reporter": "~0.1",
+    "karma-jasmine": "~0.1",
+    "karma-ng-scenario": "~0.1",
+    "nodemon": "1.0.14",
+    "gulp-util": "~2.2.12",
+    "gulp": "~3.5.2",
+    "gulp-angular-gettext": "0.3.0",
+    "gulp-concat": "~2.1.7",
+    "gulp-coverage": "0.0.18",
+    "gulp-download": "0.0.0",
+    "gulp-jasmine": "~0.1.2",
+    "gulp-jshint": "~1.3.4",
+    "gulp-karma": "0.0.2",
+    "protractor": "~0.17.0",
+    "jasmine-core": "~2.0.0",
+    "jasmine-node": "~1.13.1",
+    "csv": "~0.3.7",
+    "decompress": "~0.1.6",
+    "unzip": "~0.1.9",
+    "osmtogeojson": "~2.0.5",
+    "phantomjs": "~1.9",
+    "optimist": "~0.6.1"
+  }
+}

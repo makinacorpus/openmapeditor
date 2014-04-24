@@ -1,0 +1,54 @@
+{
+	"layers": [
+		{
+			"id": "complet",
+			"title": "Complet (rues, bâtiments, ...)",
+			"uri": "http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg",
+			"layerOptions": {
+				"subdomains": "1234",
+				"attribution": "<a href=\"http://www.mapquest.com/\">MapQuest</a> &mdash;  &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a>"
+			}
+		},{
+			"id": "osm",
+	        "title": "OpenStreetMap",
+    	    "uri": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        },{
+			"id": "ortho",
+			"title": "Photos (CG44)",
+			"uri": "http://{s}.tiles.cg44.makina-corpus.net/ortho-2012/{z}/{x}/{y}.jpg",
+			"layerOptions": {
+                "continuousWorld": true,
+                "tms": true,
+                "maxZoom": 18,
+                "minZoom": 12,
+                "subdomains": "abcdefgh",
+                "attribution": "Source: D&eacute;partement de Loire-Atlantique"
+			}
+		},{	
+			"id": "esri-worldgraycanvas",
+			"title": "Niveaux de gris (ESRI)",
+			"uri": "http://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+			"layerOptions": {
+				"maxZoom": 16,
+				"attribution": "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ"
+			}
+		},{	
+			"id": "acetate",
+			"title": "Dessin (Acetate)",
+			"uri": "http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png",
+			"layerOptions": {
+				"attribution": "&copy;2012 Esri & Stamen, Data from OSM and Natural Earth",
+				"subdomains": "0123",
+				"minZoom": 2,
+				"maxZoom": 18
+			}
+		},{	
+			"id": "esri-worldimagery",
+			"title": "Photos (ESRI)",
+			"uri": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+			"layerOptions": {
+				"attribution": "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+			}
+		}
+	]
+}

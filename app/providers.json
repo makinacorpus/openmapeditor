@@ -1,0 +1,55 @@
+{
+	"providers": [
+		{
+			"id": "OpenStreetMap_BlackAndWhite",
+			"url": "http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png",
+			"attribution": "&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>"
+		},
+		{
+			"id": "OpenStreetMap_DE",
+			"url": "http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png",
+			"attribution": "&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>"
+		},
+		{
+			"id": "Thunderforest_Landscape",
+			"url": "http://{s}.tile3.opencyclemap.org/landscape/{z}/{x}/{y}.png",
+			"attribution": "&copy; <a href=\"http://www.opencyclemap.org\">OpenCycleMap</a>, &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>"
+		},
+		{
+			"id": "Thunderforest_Outdoors",
+			"url": "http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png",
+			"attribution": "&copy; <a href=\"http://www.opencyclemap.org\">OpenCycleMap</a>, &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>"
+		},
+		{
+			"id": "OpenMapSurfer_Roads",
+			"url": "http://129.206.74.245:8001/tms_r.ashx?x={x}&y={y}&z={z}",
+			"attribution": "Imagery from <a href=\"http://giscience.uni-hd.de/\">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>"
+		},
+		{
+			"id": "OpenMapSurfer_Grayscale",
+			"url": "http://129.206.74.245:8008/tms_rg.ashx?x={x}&y={y}&z={z}",
+			"attribution": "Imagery from <a href=\"http://giscience.uni-hd.de/\">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>"
+		},
+		{
+			"id": "MapQuestOpen_OSM",
+			"url": "http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg",
+			"attribution": "Tiles Courtesy of <a href=\"http://www.mapquest.com/\">MapQuest</a> &mdash; Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>",
+			"subdomains": "1234"
+		},
+		{
+			"id": "Esri_WorldStreetMap",
+			"url": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+			"attribution": "Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012"
+		},
+		{
+			"id": "Esri_WorldTopoMap",
+			"url": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
+			"attribution": "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community"
+		},
+		{
+			"id": "Esri_WorldImagery",
+			"url": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+			"attribution": "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+		}
+	]
+}

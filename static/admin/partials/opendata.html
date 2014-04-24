@@ -1,0 +1,91 @@
+<style>
+.angular-google-map-container { height: 400px; }
+</style>
+<div id="maps-wrapper" class="row">
+  <div class="col-md-4">
+
+    <div ng-include="'./partials/messages.html'"></div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" translate>Resource</div>
+      <div class="panel-body">
+
+        <table class="table table-condensed">
+          <tr>
+            <td>URL</td>
+            <td colspan="2">
+              <input type="text" class="form-control" ng-model="geojson"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Feature ID</td>
+            <td>
+              <input type="text" class="form-control" ng-model="featureID"/>
+            </td>
+            <td>{{getFeatureID(currentFeature)}}</td>
+          </tr>
+          <tr>
+            <td>Feature name</td>
+            <td>
+              <input type="text" class="form-control" ng-model="featureName"/>
+            </td>
+            <td>{{getFeatureName(currentFeature)}}</td>
+          </tr>
+          <tr>
+            <td>Feature address</td>
+            <td>
+              <input type="text" class="form-control" ng-model="featureAddressExp"/>
+            </td>
+            <td>
+              <span ng-bind="$eval(featureAddressExp)"></span>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" translate>Features</div>
+      <div class="panel-body">
+      <div class="input-group margin-bottom-sm">
+          <input type="search" class="form-control" ng-model="q" placeholder="Rechercher une feature" />
+          <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+      </div>
+        <div class="list-group">
+          <a class="list-group-item" title="{{feature.properties.geo.name}}"
+             ng-repeat="feature in features | filter:q"
+             ng-class="{'active': getFeatureID(currentFeature) === getFeatureID(feature)}"
+             ng-click="setCurrentFeature(feature)">
+              [{{getFeatureID(feature)}}] {{getFeatureName(feature)}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+
+    <leaflet center="currentMap" markers="markers" width="100%" height="600"></leaflet>
+
+    <a target="_blank" ng-href="http://fr.wikipedia.org/w/index.php?search={{getFeatureName(currentFeature)}}" class="btn btn-default" translate>Open in Wikipedia</a>
+    <a target="_blank" ng-href="https://www.google.com/maps?t=m&ll={{currentMap.lat}},{{currentMap.lng}}&z=18&output=classic&dg=opt&q={{getFeatureName(currentFeature)}}" class="btn btn-default" translate>Open in Google Maps</a>
+    <a target="_blank" ng-href="https://openstreetmap.org/edit#map=19/{{currentMap.lat}}/{{currentMap.lng}}" class="btn btn-default" translate>Open in OpenStreetMap editor</a>
+
+    <table class="table table-condensed">
+      <tr ng-repeat="(key, value) in currentFeature.properties" ng-if="shouldDisplay(key, value)">
+        <td>
+          {{key}}
+        </td>
+        <td>
+          <input class="form-control" type="text" value="{{value}}"/>
+        </td>
+        <td><button ng-click="hide(key)" class="btn btn-danger" >Don't use</button></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    </div>
+
+  </div>
+
+</div>

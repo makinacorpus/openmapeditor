@@ -1,0 +1,57 @@
+{
+  "name": "openmapeditor",
+  "version": "0.1",
+  "homepage": "https://github.com/makinacorpus/openmapeditor",
+  "authors": [
+    "JeanMichel FRANCOIS <jeanmichel.francois@makina-corpus.com>"
+  ],
+  "description": "Create / Edit / Delete maps using opensource technologies",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.2.15",
+    "angular-animate": "1.2.15",
+    "angular-bootstrap": "~0.10.0",
+    "angular-carousel": "*",
+    "angular-cookies": "1.2.15",
+    "angular-leaflet": "0.7.5",
+    "angular-loader": "1.2.15",
+    "angular-mocks": "1.2.15",
+    "angular-resource": "1.2.15",
+    "angular-route": "1.2.15",
+    "angular-sanitize": "1.2.15",
+    "angular-scenario": "1.2.15",
+    "angular-touch": "1.2.15",
+    "bootstrap": "~3.0.3",
+    "gremlins": "https://github.com/marmelab/gremlins.js.git",
+    "jquery1": "jquery#1.11.0",
+    "leaflet-dist": "0.7.2",
+    "leaflet-draw": "Leaflet/Leaflet.draw#0.2.3",
+    "leaflet.markercluster": "~0.4.0",
+    "leaflet-MiniMap": "*",
+    "leaflet-control-geocoder": "perliedman/leaflet-control-geocoder#0.2.1",
+    "leaflet-fullscreen": "https://github.com/Leaflet/Leaflet.fullscreen/archive/252d5f403a510eb43992fbfb51b189d843ece008.zip",
+    "leaflet-routing-machine": "perliedman/leaflet-routing-machine#0.1.1",
+    "leaflet-revealosm": "yohanboniface/Leaflet.RevealOSM",
+    "leaflet-label": "Leaflet/Leaflet.label#master",
+    "font-awesome": "~4.0.3",
+    "danialfarid-angular-file-upload": "~1.2.8",
+    "angular-gettext": "~0.2.6",
+    "restangular": "~1.3.1",
+    "angular-ui-tinymce": "latest",
+    "angular-ui-utils": "bower-keypress",
+    "underscore": "~1.6.0"
+  },
+  "resolutions": {
+    "angular": "1.2.15",
+    "angular-animate": "1.2.15",
+    "angular-route": "1.2.15",
+    "angular-mocks": "1.2.15"
+  }
+}

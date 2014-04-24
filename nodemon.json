@@ -1,0 +1,4 @@
+{
+  "verbose": true,
+  "ignore": ["bower_components/*", "coverage/*", "debug/*", "node_modules/*", "nodejs/*", "scripts/*", "selenium/*", "spec", "src/*", "static/*"]
+}

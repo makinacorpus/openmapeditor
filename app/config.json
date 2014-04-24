@@ -1,0 +1,19 @@
+{
+	"app": {
+		"port": {
+			"api": 3000,
+			"view": 3001
+		},
+		"path":{
+			"db": "var/maps.sqlite",
+			"images": "var/images"
+		},
+		"session":{
+			"secret": "m@kina"
+		},
+		"logger":{
+			"format": "dev",
+			"immediate": true
+		}
+	}
+}

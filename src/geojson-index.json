@@ -1,0 +1,28 @@
+{"layers": [
+{
+	"id":"osm-cuisine",
+	"title":"Restauration (Fast food, café et restaurants)",
+	"description": "Localisation des Restaurants. Source: OSM",
+	"uri": "/geojson/osm-cuisine.geo.json"
+},{
+	"id":"osm-cuisine-restaurant",
+	"title":"Restauration (restaurants)",
+	"description": "Localisation des Restaurants. Source: OSM",
+	"uri": "/geojson/osm-cuisine-restaurant.geo.json"
+},{
+	"id":"osm-cuisine-fastfood",
+	"title":"Restauration (fast food)",
+	"description": "Localisation des fast food. Source: OSM",
+	"uri": "/geojson/osm-cuisine-fastfood.geo.json"
+},{
+	"id":"osm-cuisine-cafe",
+	"title":"Restauration (café)",
+	"description": "Localisation des cafés. Source: OSM",
+	"uri": "/geojson/osm-cuisine-cafe.geo.json"
+},{
+	"id":"osm-bakery",
+	"title":"Boulangeries (OSM)",
+	"description": "Localisation des boulangeries",
+	"uri": "/geojson/osm-bakery.geo.json"
+}]
+}

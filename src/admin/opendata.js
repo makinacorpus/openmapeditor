@@ -8,12 +8,23 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
 }]);
 angular.module('myApp.controllers').controller(
     'OpendataController',
-    ['$scope', '$http', 'messagesService', 'Restangular',
-    function($scope, $http, messagesService, Restangular){
+    ['$scope', '$http', 'messagesService', 'Restangular', 'osmService', 'leafletData',
+    function($scope, $http, messagesService, Restangular, osmService, leafletData){
         Restangular.all('layers').getList().then(function (data) {
             $scope.opendataLayers = data;
         });
         $scope.previousConfiguration = {};
+        $scope._ = _; // inject underscorejs for expr
+        $scope.capitalize = function(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        };
+        var phoneRegExp = new RegExp('^[0-9]{1}');
+        $scope.i18nPhone = function(string){
+            if (string.indexOf('+33') !== 0){
+                return string.replace(phoneRegExp, '+33 ');
+            }
+            return string;
+        };
         $scope.traverse = function(obj, path){
             var succeed = true;
             if (typeof path !== 'object'){
@@ -67,9 +78,9 @@ angular.module('myApp.controllers').controller(
             return name;
         };
         $scope.hidden = [];
-        $scope.geojson = '/geojson/culture-tourisme-restauration.geo.json';
+        $scope.geojson = '/geojson/culture-bibliotheque.geo.json';
         $scope.featureName = 'properties.geo.name';
-        $scope.featureID = 'properties.ID';
+        $scope.featureID = 'properties._IDOBJ';
         $scope.featureAddressExp = 'currentFeature.properties.ADR_1';
         $scope.reloadFeatures = function(){
             $http.get($scope.geojson).then(
@@ -99,15 +110,36 @@ angular.module('myApp.controllers').controller(
             $scope.hidden.push(key);
         };
         $scope.setCurrentFeature = function(feature){
-            $scope.currentFeature = feature;
-            $scope.markers.Localisation.lng = feature.geometry.coordinates[0];
-            $scope.markers.Localisation.lat = feature.geometry.coordinates[1];
-            $scope.markers.Localisation.message = $scope.getFeatureName(feature);
-//            $scope.markers.Localisation.message = feature.properties.popupContent;
-            $scope.currentMap.zoom = 18;
-            $scope.currentMap.lat = feature.geometry.coordinates[1];
-            $scope.currentMap.lng = feature.geometry.coordinates[0];
-            $scope.currentAddress = $scope.$eval($scope.featureAddressExp);
+            leafletData.getMap().then(function(map){
+                $scope.currentFeature = feature;
+                $scope.markers.Localisation.lng = feature.geometry.coordinates[0];
+                $scope.markers.Localisation.lat = feature.geometry.coordinates[1];
+                $scope.markers.Localisation.message = $scope.getFeatureName(feature);
+                map.setView(
+                    L.latLng(
+                        feature.geometry.coordinates[1],
+                        feature.geometry.coordinates[0]
+                    ),
+                    17
+                );
+                $scope.currentAddress = $scope.$eval($scope.featureAddressExp);
+                var b = map.getBounds();
+                var obox = '' + b.getSouth() + ',' + b.getWest() + ',' + b.getNorth() + ',' + b.getEast();
+                var query = 'node('+ obox+')' + $scope.overpassquery + ';out;';
+
+                osmService.overpass(query).then(function(nodes){
+                    $scope.nodes = osmService.getNodesInJSON(nodes);
+                    if ($scope.nodes.length === 1){
+                        $scope.setCurrentNode($scope.nodes[0]);
+                    }
+                });
+                $scope.currentFeature.osm = {};
+                for (var property in $scope.osmtags) {
+                    if ($scope.osmtags.hasOwnProperty(property)) {
+                        $scope.currentFeature.osm[property] = $scope.getCurrentNodeValueFromFeature(property);
+                    }
+                }
+            });
         };
         $scope.$watch('geojson', function(){
             $scope.reloadFeatures();
@@ -115,5 +147,66 @@ angular.module('myApp.controllers').controller(
         $scope.$watch('featureID', function(){
             $scope.reloadFeatures();
         });
+
+        $scope.username = '';
+        $scope.password = '';
+        $scope.overpassquery = '[amenity=library]';
+        $scope.nodes = [];
+/*        $scope.login = function(){
+            $scope.Authorization = osmService.getAuthorization($scope.username, $scope.password);
+            osmService.get('/api/capabilities').then(function(capabilities){
+                $scope.capabilities = capabilities;
+            });
+        };
+        $scope.logout = function(){
+            osmService.clearCredentials();
+        };*/
+        $scope.osmtags = {
+            amenity: "'library'",
+            'addr:city': 'capitalize(currentFeature.properties.COMMUNE)',
+            phone: 'i18nPhone(currentFeature.properties.TELEPHONE)',
+            postal_code: 'currentFeature.properties.CODE_POSTAL',
+            name: 'currentFeature.properties.geo.name'
+        };
+        $scope.setCurrentNode = function(node){
+            $scope.currentNode = node;
+            $scope.updatedNode = angular.copy(node);
+            for (var property in $scope.osmtags) {
+                if ($scope.osmtags.hasOwnProperty(property)) {
+                    $scope.updatedNode.properties[property] = $scope.getCurrentNodeValueFromFeature(property);
+                }
+            }
+        };
+        $scope.addOSMTag = function(){
+            $scope.osmtags[$scope.newOSMKey] = $scope.newOSMValueExpr;
+            $scope.newOSMKey = '';
+            $scope.newOSMValueExpr = '';
+        };
+        $scope.getCurrentNodeValueFromFeature = function(key){
+            if ($scope.osmtags[key] !== undefined){
+                return $scope.$eval($scope.osmtags[key]);
+            }
+        };
+        $scope.deleteOSMTag = function(index){
+            delete $scope.osmtags[index];
+        };
+        $scope.getTableRowClass = function(key, value){
+            if (key === 'id'){
+                return 'hidden';
+            }
+            if (value === '' || value === undefined){
+                if ($scope.currentNode.properties[key] === value){
+                    return;
+                }
+                return 'danger';
+            }
+            if ($scope.currentNode.properties[key] === undefined){
+                return 'success';
+            }
+            if ($scope.currentNode.properties[key] !== value){
+                return 'warning';
+            }
+        };
+
     }]
 );

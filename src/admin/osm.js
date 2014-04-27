@@ -5,7 +5,7 @@ angular.module('myApp.services').factory('osmService',
     function ($base64, $cookieStore, $http, $q) {
         var API = 'http://api.openstreetmap.org';
         // initialize to whatever is in the cookie, if anything
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookieStore.get('authdata');
+        //$http.defaults.headers.common['Authorization'] = 'Basic ' + $cookieStore.get('authdata');
         var parseXml;
 
         if (typeof window.DOMParser !== 'undefined') {
@@ -25,6 +25,7 @@ angular.module('myApp.services').factory('osmService',
         }
 
         return {
+/*
             setCredentials: function (username, password) {
                 console.log('setCrendentials');
                 var encoded = $base64.encode(username + ':' + password);
@@ -36,10 +37,12 @@ angular.module('myApp.services').factory('osmService',
                 return 'Basic ' + encoded;
             },
             clearCredentials: function () {
+                console.log('clear credentials');
                 document.execCommand('ClearAuthenticationCache');
                 $cookieStore.remove('authdata');
                 delete $http.defaults.headers.common.Authorization;
             },
+            */
             parseXML: function(data){
                 return parseXml(data);
             },
@@ -60,9 +63,12 @@ angular.module('myApp.services').factory('osmService',
                 var self = this;
                 var headers = {'Content-Type': 'application/x-www-form-urlencoded'};
                 var data = {data:query};
+                console.log('overpass query start');
                 $http.post(url, query, {headers: headers}).then(function(data){
+                    console.log('overpass query succeed');
                     deferred.resolve(self.parseXML(data.data));
                 },function(data) {
+                    console.log('overpass query failed');
                     deferred.reject(data);
                 });
                 return deferred.promise;
@@ -95,46 +101,3 @@ angular.module('myApp.services').factory('osmService',
         };
     }
 ]);
-angular.module('myApp.controllers').controller(
-    'OSMController',
-    ['$scope', '$http', 'osmService', 'messagesService', 'Restangular', 'leafletData',
-    function($scope, $http, osmService, messagesService, Restangular, leafletData){
-        $scope.username = '';
-        $scope.password = '';
-        $scope.overpassquery = '[cuisine]';
-        osmService.clearCredentials();
-        $scope.nodes = [];
-        $scope.login = function(){
-            $scope.Authorization = osmService.getAuthorization($scope.username, $scope.password);
-            osmService.get('/api/capabilities').then(function(capabilities){
-                $scope.capabilities = capabilities;
-            });
-        };
-        $scope.logout = function(){
-            osmService.clearCredentials();
-        };
-        $scope.getMapData = function(){
-            leafletData.getMap().then(function(map) {
-                var b = map.getBounds();
-                //Overpass get
-                var obox = '' + b.getSouth() + ',' + b.getWest() + ',' + b.getNorth() + ',' + b.getEast();
-                var query = 'node('+ obox+')' + $scope.overpassquery + ';out;';
-
-                osmService.overpass(query).then(function(nodes){
-                    $scope.nodes = osmService.getNodesInJSON(nodes);
-                });
-
-                // OSM get -> all nodes but only with ids
-                // So lets use overpass api
-                /*
-                var bbox = '' + b.getWest() + ',' + b.getSouth() + ',' + b.getEast()+ ',' + b.getNorth();
-                osmService.get('/api/0.6/map', {params: {bbox: bbox}}).then(function(map){
-                    $scope.nodes = map.documentElement.getElementsByTagName('node');
-                }, function(data, status, headers, config){
-                    //can't find the reason ...
-                });
-                */
-            });
-        };
-    }]
-);

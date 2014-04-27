@@ -40,7 +40,6 @@ gulp.task('copy', function() {
 });
 gulp.task('scripts-libs', function() {
   gulp.src([
-        'bower_components/underscore/underscore-min.js',
         'bower_components/danialfarid-angular-file-upload/dist/angular-file-upload-shim.min.js',
         'bower_components/leaflet-dist/leaflet.js',
         'bower_components/leaflet-draw/dist/leaflet.draw.js',

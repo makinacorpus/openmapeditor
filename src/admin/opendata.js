@@ -59,7 +59,12 @@ angular.module('myApp.controllers').controller(
             if (!feature){
                 return;
             }
-            return $scope.traverse(feature, $scope.featureName);
+            var name = $scope.traverse(feature, $scope.featureName);
+            if (!name){
+                //try OSM:
+                return feature.properties.name;
+            }
+            return name;
         };
         $scope.hidden = [];
         $scope.geojson = '/geojson/culture-tourisme-restauration.geo.json';
@@ -97,7 +102,7 @@ angular.module('myApp.controllers').controller(
             $scope.currentFeature = feature;
             $scope.markers.Localisation.lng = feature.geometry.coordinates[0];
             $scope.markers.Localisation.lat = feature.geometry.coordinates[1];
-            $scope.markers.Localisation.message = feature.properties.geo.name;
+            $scope.markers.Localisation.message = $scope.getFeatureName(feature);
 //            $scope.markers.Localisation.message = feature.properties.popupContent;
             $scope.currentMap.zoom = 18;
             $scope.currentMap.lat = feature.geometry.coordinates[1];

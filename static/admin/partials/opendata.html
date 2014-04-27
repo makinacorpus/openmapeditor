@@ -1,13 +1,37 @@
 <style>
 .angular-google-map-container { height: 400px; }
 </style>
-<div id="maps-wrapper" class="row">
+<div id="maps-wrapper" class="row" ng-controller="OSMController">
   <div class="col-md-4">
 
     <div ng-include="'./partials/messages.html'"></div>
+    <div class="panel panel-default">
+      <div class="panel-heading" translate>Login</div>
+      <div class="panel-body">
+        <div class="form-group">
+          <input type="text" name="username" class="form-control" ng-model="username" placeholder="username"/>
+        </div>
+        <div class="form-group">
+          <input type="password" name="password" class="form-control" ng-model="password" placeholder="password"/>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" translate>OSM Resource</div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Overpass API query</label>
+          <p class="help-block"><a href="http://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide">Query language guide</a></p>
+          <input type="text" name="overpassquery" class="form-control" ng-model="overpassquery" placeholder="Overpass API query"/>
+        </div>
+        <a class="btn btn-primary" ng-click="getMapData()" translate>get osm data</a>
+
+
+      </div>
+    </div>
 
     <div class="panel panel-default">
-      <div class="panel-heading" translate>Resource</div>
+      <div class="panel-heading" translate>OpenData Resource</div>
       <div class="panel-body">
 
         <table class="table table-condensed">
@@ -46,7 +70,7 @@
     </div>
 
     <div class="panel panel-default">
-      <div class="panel-heading" translate>Features</div>
+      <div class="panel-heading" translate>OpenData Features</div>
       <div class="panel-body">
       <div class="input-group margin-bottom-sm">
           <input type="search" class="form-control" ng-model="q" placeholder="Rechercher une feature" />
@@ -84,6 +108,23 @@
         <td></td>
       </tr>
     </table>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" translate>OSM Features</div>
+      <div class="panel-body">
+
+        <div class="input-group margin-bottom-sm">
+          <input type="search" class="form-control" ng-model="q" placeholder="Rechercher une feature" />
+          <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+        </div>
+        <div class="list-group">
+          <a class="list-group-item"
+             ng-repeat="node in nodes | filter:q"
+             ng-click="setCurrentFeature(node)">
+              [{{node.properties.id}}] {{node.properties.name}}</a>
+        </div>
+
+
     </div>
 
   </div>

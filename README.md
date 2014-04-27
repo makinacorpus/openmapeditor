@@ -1,5 +1,5 @@
-Project
-=======
+OpenMapEditor
+=============
 
 repository: https://github.com/makinacorpus/openmapeditor
 

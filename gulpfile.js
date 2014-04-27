@@ -54,7 +54,9 @@ gulp.task('scripts-libs', function() {
         'bower_components/lodash/dist/lodash.min.js',
         'bower_components/restangular/dist/restangular.min.js',
         'bower_components/angular-ui-tinymce/src/tinymce.js',
-        'bower_components/angular-ui-utils/keypress.min.js'
+        'bower_components/angular-ui-utils/keypress.min.js',
+        'bower_components/angular-base64/angular-base64.min.js',
+        'bower_components/angular-cookies/angular-cookies.min.js'
       ])
     .pipe(concat("libs.js"))
     .pipe(gulp.dest('static/admin/js'));
